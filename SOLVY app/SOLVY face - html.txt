@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Galileo Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-slate-50 justify-between group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+      <div>
+        <div class="flex items-center bg-slate-50 p-4 pb-2 justify-end">
+          <div class="flex w-12 items-center justify-end">
+            <button
+              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 bg-transparent text-[#0e141b] gap-2 text-base font-bold leading-normal tracking-[0.015em] min-w-0 p-0"
+            >
+              <div class="text-[#0e141b]" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                  <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+                </svg>
+              </div>
+            </button>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-4 px-4 py-6">
+          <div class="flex min-w-72 flex-1 flex-col gap-2">
+            <p class="text-[#0e141b] text-base font-medium leading-normal">Account Balance</p>
+            <p class="text-[#0e141b] tracking-light text-[32px] font-bold leading-tight truncate">$5,943</p>
+            <div class="flex gap-1">
+              <p class="text-[#4e7397] text-base font-normal leading-normal">Last 30 Days</p>
+              <p class="text-[#078838] text-base font-medium leading-normal">+12%</p>
+            </div>
+            <div class="flex min-h-[180px] flex-1 flex-col gap-8 py-4">
+              <svg width="100%" height="148" viewBox="-3 0 478 150" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <path
+                  d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z"
+                  fill="url(#paint0_linear_1131_5935)"
+                ></path>
+                <path
+                  d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25"
+                  stroke="#4e7397"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                ></path>
+                <defs>
+                  <linearGradient id="paint0_linear_1131_5935" x1="236" y1="1" x2="236" y2="149" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#e7edf3"></stop>
+                    <stop offset="1" stop-color="#e7edf3" stop-opacity="0"></stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="flex justify-around">
+                <p class="text-[#4e7397] text-[13px] font-bold leading-normal tracking-[0.015em]">1D</p>
+                <p class="text-[#4e7397] text-[13px] font-bold leading-normal tracking-[0.015em]">1W</p>
+                <p class="text-[#4e7397] text-[13px] font-bold leading-normal tracking-[0.015em]">1M</p>
+                <p class="text-[#4e7397] text-[13px] font-bold leading-normal tracking-[0.015em]">3M</p>
+                <p class="text-[#4e7397] text-[13px] font-bold leading-normal tracking-[0.015em]">1Y</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 class="text-[#0e141b] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Recent Transactions</h2>
+        <div class="flex items-center gap-4 bg-slate-50 px-4 min-h-[72px] py-2 justify-between">
+          <div class="flex flex-col justify-center">
+            <p class="text-[#0e141b] text-base font-medium leading-normal line-clamp-1">Buy Bitcoin</p>
+            <p class="text-[#4e7397] text-sm font-normal leading-normal line-clamp-2">Dec 5</p>
+          </div>
+          <div class="shrink-0"><p class="text-[#0e141b] text-base font-normal leading-normal">$500.00</p></div>
+        </div>
+        <div class="flex items-center gap-4 bg-slate-50 px-4 min-h-[72px] py-2 justify-between">
+          <div class="flex flex-col justify-center">
+            <p class="text-[#0e141b] text-base font-medium leading-normal line-clamp-1">Borrow USDC</p>
+            <p class="text-[#4e7397] text-sm font-normal leading-normal line-clamp-2">Dec 5</p>
+          </div>
+          <div class="shrink-0"><p class="text-[#0e141b] text-base font-normal leading-normal">$2,000.00</p></div>
+        </div>
+        <div class="flex items-center gap-4 bg-slate-50 px-4 min-h-[72px] py-2 justify-between">
+          <div class="flex flex-col justify-center">
+            <p class="text-[#0e141b] text-base font-medium leading-normal line-clamp-1">Sell Ethereum</p>
+            <p class="text-[#4e7397] text-sm font-normal leading-normal line-clamp-2">Dec 4</p>
+          </div>
+          <div class="shrink-0"><p class="text-[#0e141b] text-base font-normal leading-normal">$700.00</p></div>
+        </div>
+        <div class="flex items-center gap-4 bg-slate-50 px-4 min-h-[72px] py-2 justify-between">
+          <div class="flex flex-col justify-center">
+            <p class="text-[#0e141b] text-base font-medium leading-normal line-clamp-1">Deposit ETH</p>
+            <p class="text-[#4e7397] text-sm font-normal leading-normal line-clamp-2">Dec 4</p>
+          </div>
+          <div class="shrink-0"><p class="text-[#0e141b] text-base font-normal leading-normal">$1,000.00</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-end overflow-hidden px-5 pb-5">
+          <button
+            class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 bg-[#1980e6] text-slate-50 text-base font-bold leading-normal tracking-[0.015em] min-w-0 px-2 gap-4 pl-4 pr-6"
+          >
+            <div class="text-slate-50" data-icon="Plus" data-size="24px" data-weight="regular">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
+              </svg>
+            </div>
+          </button>
+        </div>
+        <div class="h-5 bg-slate-50"></div>
+      </div>
+    </div>
+  </body>
+</html>
