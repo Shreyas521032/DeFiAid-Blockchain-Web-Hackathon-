@@ -1,0 +1,174 @@
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Flask App"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Create Migration"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Apply Migration"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Set Flask App"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Initialize Flask-Migrate"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Test Script"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Create Test User"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Realtime Monitoring Test"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Check GitHub Repo"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Check GitHub Token"
+
+[[workflows.workflow]]
+name = "Run Flask App"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Create Migration"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export FLASK_APP=main.py && flask db migrate -m 'Add icon_position to User model'"
+
+[[workflows.workflow]]
+name = "Apply Migration"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export FLASK_APP=main.py && flask db upgrade"
+
+[[workflows.workflow]]
+name = "Set Flask App"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export FLASK_APP=main.py && echo $FLASK_APP"
+
+[[workflows.workflow]]
+name = "Initialize Flask-Migrate"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export FLASK_APP=main.py && flask db init && flask db migrate -m 'Initial migration' && flask db upgrade"
+
+[[workflows.workflow]]
+name = "Run Test Script"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python test_multiple_apis.py"
+
+[[workflows.workflow]]
+name = "Create Test User"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python create_test_user.py"
+
+[[workflows.workflow]]
+name = "Run Realtime Monitoring Test"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python test_realtime_monitoring.py"
+
+[[workflows.workflow]]
+name = "Check GitHub Repo"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "curl -H 'Authorization: token $GITHUB_TOKEN' https://api.github.com/repos/smayone/DECIDEY-MAN-Development"
+
+[[workflows.workflow]]
+name = "Check GitHub Token"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "curl -H 'Authorization: token $GITHUB_TOKEN' https://api.github.com/user"
+
+[deployment]
+run = ["sh", "-c", "python main.py"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[auth]
+pageEnabled = true
+buttonEnabled = false
