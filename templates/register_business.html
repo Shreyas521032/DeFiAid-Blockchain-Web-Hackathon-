@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Register Business{% endblock %}
+
+{% block content %}
+<h2>Register Your Business</h2>
+<form method="POST">
+    <div>
+        <label for="business_name">Business Name:</label>
+        <input type="text" id="business_name" name="business_name" required>
+    </div>
+    <div>
+        <label for="business_address">Business Address:</label>
+        <textarea id="business_address" name="business_address" required></textarea>
+    </div>
+    <div>
+        <label for="business_phone">Business Phone:</label>
+        <input type="tel" id="business_phone" name="business_phone" required>
+    </div>
+    <div>
+        <label for="business_email">Business Email:</label>
+        <input type="email" id="business_email" name="business_email" required>
+    </div>
+    <button type="submit">Register Business</button>
+</form>
+{% endblock %}

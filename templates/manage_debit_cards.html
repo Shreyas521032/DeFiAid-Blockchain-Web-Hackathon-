@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Debit Cards{% endblock %}
+
+{% block content %}
+<h2>Manage Debit Cards</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Card Number</th>
+            <th>Expiration Date</th>
+            <th>Cardholder Name</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for card in debit_cards %}
+        <tr>
+            <td>**** **** **** {{ card.card_number[-4:] }}</td>
+            <td>{{ card.expiration_date.strftime('%m/%Y') }}</td>
+            <td>{{ card.cardholder_name }}</td>
+            <td>{{ 'Active' if card.is_active else 'Inactive' }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('toggle_card_status', card_id=card.id) }}">
+                    <button type="submit">{{ 'Deactivate' if card.is_active else 'Activate' }}</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('register_debit_card') }}">Register New Card</a>
+{% endblock %}

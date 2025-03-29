@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | SOLVY{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="card">
+    <h2>Recent Transactions</h2>
+    <table id="transactionTable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Source Currency</th>
+                <th>Target Currency</th>
+                <th>Exchange Rate</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.source_currency }}</td>
+                <td>{{ transaction.target_currency }}</td>
+                <td>{{ transaction.exchange_rate }}</td>
+                <td>{{ transaction.status }}</td>
+                <td><a href="{{ url_for('transaction_details', id=transaction.id) }}" class="btn">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h2>Set Alert</h2>
+    <form id="alertForm">
+        <input type="number" id="amount_threshold" name="amount_threshold" step="0.01" placeholder="Amount Threshold" required>
+        <input type="text" id="currency" name="currency" placeholder="Currency" required>
+        <button type="submit" class="btn">Set Alert</button>
+    </form>
+</div>
+
+<div id="alertMessages"></div>
+
+<div id="real-time-updates" class="card">
+    <h2>Real-time Updates</h2>
+    <!-- Real-time updates will be inserted here -->
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script>
+    const socket = io();
+    const updates = document.getElementById('real-time-updates');
+    const transactionTable = document.getElementById('transactionTable').getElementsByTagName('tbody')[0];
+    const alertForm = document.getElementById('alertForm');
+    const alertMessages = document.getElementById('alertMessages');
+
+    socket.on('connect', () => {
+        console.log('Connected to server');
+    });
+
+    socket.on('transaction_update', (data) => {
+        const newUpdate = document.createElement('div');
+        newUpdate.textContent = `New transaction: ${data.amount} ${data.source_currency} to ${data.target_currency} - ${data.status}`;
+        updates.insertBefore(newUpdate, updates.firstChild);
+
+        const newRow = transactionTable.insertRow(0);
+        newRow.innerHTML = `
+            <td>${new Date(data.timestamp).toLocaleString()}</td>
+            <td>${data.amount}</td>
+            <td>${data.source_currency}</td>
+            <td>${data.target_currency}</td>
+            <td>${data.exchange_rate}</td>
+            <td>${data.status}</td>
+            <td><a href="/transaction/${data.id}" class="btn">View</a></td>
+        `;
+    });
+
+    socket.on('alert_triggered', (data) => {
+        const alertMessage = document.createElement('div');
+        alertMessage.textContent = data.message;
+        alertMessage.className = 'alert';
+        alertMessages.insertBefore(alertMessage, alertMessages.firstChild);
+    });
+
+    alertForm.onsubmit = (e) => {
+        e.preventDefault();
+        const amountThreshold = document.getElementById('amount_threshold').value;
+        const currency = document.getElementById('currency').value;
+
+        fetch('/api/set_alert', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ amount_threshold: amountThreshold, currency: currency }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                const successMessage = document.createElement('div');
+                successMessage.textContent = 'Alert set successfully';
+                successMessage.className = 'alert success';
+                alertMessages.insertBefore(successMessage, alertMessages.firstChild);
+            } else {
+                const errorMessage = document.createElement('div');
+                errorMessage.textContent = 'Error setting alert';
+                errorMessage.className = 'alert';
+                alertMessages.insertBefore(errorMessage, alertMessages.firstChild);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            const errorMessage = document.createElement('div');
+            errorMessage.textContent = 'Error setting alert';
+            errorMessage.className = 'alert';
+            alertMessages.insertBefore(errorMessage, alertMessages.firstChild);
+        });
+    };
+</script>
+{% endblock %}

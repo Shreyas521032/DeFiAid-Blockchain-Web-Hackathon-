@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Transaction Details{% endblock %}
+
+{% block content %}
+<h2>Transaction Details</h2>
+<table>
+    <tr>
+        <th>Field</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td>Message Type</td>
+        <td>{{ transaction.message_type }}</td>
+    </tr>
+    <tr>
+        <td>Transaction ID</td>
+        <td>{{ transaction.transaction_id }}</td>
+    </tr>
+    <tr>
+        <td>Status</td>
+        <td>{{ transaction.status }}</td>
+    </tr>
+    <tr>
+        <td>Reason</td>
+        <td>{{ transaction.reason }}</td>
+    </tr>
+    <tr>
+        <td>Amount</td>
+        <td>{{ transaction.amount }} {{ transaction.source_currency }}</td>
+    </tr>
+    <tr>
+        <td>Target Amount</td>
+        <td>{{ transaction.amount * transaction.exchange_rate }} {{ transaction.target_currency }}</td>
+    </tr>
+    <tr>
+        <td>Exchange Rate</td>
+        <td>1 {{ transaction.source_currency }} = {{ transaction.exchange_rate }} {{ transaction.target_currency }}</td>
+    </tr>
+    <tr>
+        <td>Debtor Name</td>
+        <td>{{ transaction.debtor_name }}</td>
+    </tr>
+    <tr>
+        <td>Debtor Account</td>
+        <td>{{ transaction.debtor_account }}</td>
+    </tr>
+    <tr>
+        <td>Creditor Name</td>
+        <td>{{ transaction.creditor_name }}</td>
+    </tr>
+    <tr>
+        <td>Creditor Account</td>
+        <td>{{ transaction.creditor_account }}</td>
+    </tr>
+    <tr>
+        <td>Remittance Info</td>
+        <td>{{ transaction.remittance_info }}</td>
+    </tr>
+    <tr>
+        <td>Mandate ID</td>
+        <td>{{ transaction.mandate_id }}</td>
+    </tr>
+    <tr>
+        <td>Transaction Hash</td>
+        <td>{{ transaction.transaction_hash }}</td>
+    </tr>
+    <tr>
+        <td>Timestamp</td>
+        <td>{{ transaction.timestamp }}</td>
+    </tr>
+</table>
+
+<div>
+    <h3>ISO20022 Data</h3>
+    <pre>{{ transaction.iso20022_data }}</pre>
+</div>
+<div>
+    <h3>Ethereum Data</h3>
+    <pre>{{ transaction.ethereum_data }}</pre>
+</div>
+<a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+{% endblock %}
